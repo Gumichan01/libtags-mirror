@@ -11,25 +11,27 @@ cbvorbiscomment(Tagctx *ctx, char *k, char *v){
 	if(*v == 0)
 		return;
 	if(cistrcmp(k, "album") == 0)
-		txtcb(ctx, Talbum, v);
+		txtcb(ctx, Talbum, k, v);
 	else if(cistrcmp(k, "title") == 0)
-		txtcb(ctx, Ttitle, v);
+		txtcb(ctx, Ttitle, k, v);
 	else if(cistrcmp(k, "artist") == 0 || cistrcmp(k, "performer") == 0)
-		txtcb(ctx, Tartist, v);
+		txtcb(ctx, Tartist, k, v);
 	else if(cistrcmp(k, "tracknumber") == 0)
-		txtcb(ctx, Ttrack, v);
+		txtcb(ctx, Ttrack, k, v);
 	else if(cistrcmp(k, "date") == 0)
-		txtcb(ctx, Tdate, v);
+		txtcb(ctx, Tdate, k, v);
 	else if(cistrcmp(k, "replaygain_track_peak") == 0)
-		txtcb(ctx, Ttrackpeak, v);
+		txtcb(ctx, Ttrackpeak, k, v);
 	else if(cistrcmp(k, "replaygain_track_gain") == 0)
-		txtcb(ctx, Ttrackgain, v);
+		txtcb(ctx, Ttrackgain, k, v);
 	else if(cistrcmp(k, "replaygain_album_peak") == 0)
-		txtcb(ctx, Talbumpeak, v);
+		txtcb(ctx, Talbumpeak, k, v);
 	else if(cistrcmp(k, "replaygain_album_gain") == 0)
-		txtcb(ctx, Talbumgain, v);
+		txtcb(ctx, Talbumgain, k, v);
 	else if(cistrcmp(k, "genre") == 0)
-		txtcb(ctx, Tgenre, v);
+		txtcb(ctx, Tgenre, k, v);
+	else
+		txtcb(ctx, Tunknown, k, v);
 }
 
 int

@@ -128,25 +128,25 @@ tagm4a(Tagctx *ctx)
 				return -1;
 			sz -= 4;
 			snprint((char*)d, ctx->bufsz, "%d", beuint(d));
-			txtcb(ctx, type, d);
+			txtcb(ctx, type, "", d);
 		}else if(type == Tgenre){
 			if(ctx->read(ctx, d, 2) != 2)
 				return -1;
 			sz -= 2;
 			if((i = d[1]-1) >= 0 && i < Numgenre)
-				txtcb(ctx, type, id3genres[i]);
+				txtcb(ctx, type, "", id3genres[i]);
 		}else if(dtype == 1){ /* text */
 			if(sz >= ctx->bufsz) /* skip tags that can't fit into memory. ">=" because of '\0' */
 				continue;
 			if(ctx->read(ctx, d, sz) != sz)
 				return -1;
 			d[sz] = 0;
-			txtcb(ctx, type, d);
+			txtcb(ctx, type, "", d);
 			sz = 0;
 		}else if(type == Timage && dtype == 13) /* jpeg cover image */
-			tagscallcb(ctx, Timage, "image/jpeg", ctx->seek(ctx, 0, 1), sz, nil);
+			tagscallcb(ctx, Timage, "", "image/jpeg", ctx->seek(ctx, 0, 1), sz, nil);
 		else if(type == Timage && dtype == 14) /* png cover image */
-			tagscallcb(ctx, Timage, "image/png", ctx->seek(ctx, 0, 1), sz, nil);
+			tagscallcb(ctx, Timage, "", "image/png", ctx->seek(ctx, 0, 1), sz, nil);
 	}
 
 	return 0;

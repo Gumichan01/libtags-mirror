@@ -44,6 +44,6 @@ int utf16to8(uchar *out, int osz, const uchar *src, int sz);
  */
 void cbvorbiscomment(Tagctx *ctx, char *k, char *v);
 
-void tagscallcb(Tagctx *ctx, int type, const char *s, int offset, int size, Tagread f);
+void tagscallcb(Tagctx *ctx, int type, const char *k, const char *s, int offset, int size, Tagread f);
 
-#define txtcb(ctx, type, s) tagscallcb(ctx, type, (const char*)s, 0, 0, nil)
+#define txtcb(ctx, type, k, s) tagscallcb(ctx, type, k, (const char*)s, 0, 0, nil)

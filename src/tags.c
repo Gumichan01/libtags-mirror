@@ -26,11 +26,13 @@ static const Getter g[] =
 };
 
 void
-tagscallcb(Tagctx *ctx, int type, const char *s, int offset, int size, Tagread f)
+tagscallcb(Tagctx *ctx, int type, const char *k, const char *s, int offset, int size, Tagread f)
 {
-	ctx->found |= 1<<type;
-	ctx->tag(ctx, type, s, offset, size, f);
-	ctx->num++;
+	if(type != Tunknown){
+		ctx->found |= 1<<type;
+		ctx->num++;
+	}
+	ctx->tag(ctx, type, k, s, offset, size, f);
 }
 
 int

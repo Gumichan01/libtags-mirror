@@ -38,12 +38,12 @@ static const char *t2s[] =
 };
 
 static void
-cb(Tagctx *ctx, int t, const char *v, int offset, int size, Tagread f)
+cb(Tagctx *ctx, int t, const char *k, const char *v, int offset, int size, Tagread f)
 {
-	USED(ctx); USED(offset); USED(size); USED(f);
+	USED(ctx); USED(k); USED(f);
 	if(t == Timage)
 		print("%-12s %s %d %d\n", t2s[t], v, offset, size);
-	else
+	else if(t != Tunknown)
 		print("%-12s %s\n", t2s[t], v);
 }
 

@@ -8,6 +8,7 @@ typedef int (*Tagread)(void *buf, int *cnt);
 /* Tag type. */
 enum
 {
+	Tunknown = -1,
 	Tartist,
 	Talbum,
 	Ttitle,
@@ -43,13 +44,14 @@ struct Tagctx
 	int (*seek)(Tagctx *ctx, int offset, int whence);
 
 	/* Callback that is used by libtags to inform about the tags of a file.
-	 * "type" is the tag's type (Tartist, ...). "s" is the null-terminated string unless "type" is
+	 * "type" is the tag's type (Tartist, ...) or Tunknown if libtags doesn't know how to map a tag kind to
+	 * any of these. "k" is the raw key like "TPE1", "TPE2", etc. "s" is the null-terminated string unless "type" is
 	 * Timage. "offset" and "size" define the placement and size of the image cover ("type" = Timage)
 	 * inside the file, and "f" is not NULL in case reading the image cover requires additional
 	 * operations on the data, in which case you need to read the image cover as a stream and call this
 	 * function to apply these operations on the contents read.
 	 */
-	void (*tag)(Tagctx *ctx, int type, const char *s, int offset, int size, Tagread f);
+	void (*tag)(Tagctx *ctx, int type, const char *k, const char *s, int offset, int size, Tagread f);
 
 	/* Auxiliary data. Not used by libtags. */
 	void *aux;
