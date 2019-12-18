@@ -5,7 +5,7 @@ TARG=readtags
 OFILES=\
 	readtags.$O\
 	
-BIN=/$objtype/bin
+BIN=/$objtype/bin/audio
 
 HFILES=\
 	/sys/include/tags.h\
