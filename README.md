@@ -38,4 +38,4 @@ CPU time (784 files: mp3, ogg, flac):
 Just compile it to an archive (`.a`) and link to your program. Use it in your code
 by including `tags.h`, that's the API. Documentation is in the header.
 
-See `examples/readtags.c`. You can compile it on Linux like so: `gcc examples/readtags.c *.c -o readtags`.
+See `examples/readtags.c`. You can compile it on Linux like so: `gcc examples/readtags.c *.c -I. -o readtags`.
