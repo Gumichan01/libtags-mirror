@@ -438,9 +438,12 @@ header:
 			if(isid3(d))
 				goto header;
 		}
-		if((b = memchr(ctx->buf, 0xff, sz-1)) != nil && (b[1] & 0xe0) == 0xe0){
-			offset = ctx->seek(ctx, (char*)b - ctx->buf + offset + exsz, 0);
-			break;
+		for(b = (uchar*)ctx->buf; (b = memchr(b, 0xff, sz-3)) != nil; b++){
+			if((b[1] & 0xe0) == 0xe0){
+				offset = ctx->seek(ctx, (char*)b - ctx->buf + offset + exsz, 0);
+				exsz = 2048;
+				break;
+			}
 		}
 	}
 
