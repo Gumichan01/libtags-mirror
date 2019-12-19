@@ -53,6 +53,9 @@ struct Tagctx
 	 */
 	void (*tag)(Tagctx *ctx, int type, const char *k, const char *s, int offset, int size, Tagread f);
 
+	/* Approximate millisecond-to-byte offsets within the file, if available. This callback is optional. */
+	void (*toc)(Tagctx *ctx, int ms, int offset);
+
 	/* Auxiliary data. Not used by libtags. */
 	void *aux;
 

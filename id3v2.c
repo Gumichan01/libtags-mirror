@@ -294,10 +294,10 @@ static const int samplesframe[4][4] = {
 static void
 getduration(Tagctx *ctx, int offset)
 {
-	uvlong n, framelen, samplespf;
+	uvlong n, framelen, samplespf, toc;
 	uchar *b;
 	uint x;
-	int xversion, xlayer, xbitrate;
+	int xversion, xlayer, xbitrate, i;
 
 	if(ctx->read(ctx, ctx->buf, 256) != 256)
 		return;
@@ -330,10 +330,23 @@ getduration(Tagctx *ctx, int offset)
 				if(ctx->duration == 0 && framelen > 0)
 					ctx->duration = n * samplespf * 1000 / framelen / ctx->samplerate;
 
-				if((x & 4) != 0){ /* TOC is set */
-					/* not doing anything yet */
+				if((x & 4) != 0 && ctx->toc != nil){ /* TOC is set */
+					toc = offset + 100 + (char*)b - ctx->buf;
+					if((x & 8) != 0) /* VBR scale */
+						toc += 4;
+					for(i = 0; i < 100; i++){
+						/*
+						 * offset = n * b[i] / 256
+						 * ms = i * duration / 100
+						 */
+						ctx->toc(ctx, i * ctx->duration / 100, toc + (n * b[i]) / 256);
+					}
+					b += 100;
+					if((x & 8) != 0) /* VBR scale */
+						b += 4;
 				}
 			}
+			offset += (char*)b - ctx->buf;
 		}else if(memcmp(&ctx->buf[0x24], "VBRI", 4) == 0){
 			n = beuint((uchar*)&ctx->buf[0x32]);
 			ctx->duration = n * samplespf * 1000 / ctx->samplerate;

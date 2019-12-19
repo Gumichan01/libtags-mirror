@@ -38,13 +38,19 @@ static const char *t2s[] =
 };
 
 static void
-cb(Tagctx *ctx, int t, const char *k, const char *v, int offset, int size, Tagread f)
+tag(Tagctx *ctx, int t, const char *k, const char *v, int offset, int size, Tagread f)
 {
 	USED(ctx); USED(k); USED(f);
 	if(t == Timage)
 		print("%-12s %s %d %d\n", t2s[t], v, offset, size);
 	else if(t != Tunknown)
 		print("%-12s %s\n", t2s[t], v);
+}
+
+static void
+toc(Tagctx *ctx, int ms, int offset)
+{
+	USED(ctx); USED(ms); USED(offset);
 }
 
 static int
@@ -71,7 +77,8 @@ main(int argc, char **argv)
 	{
 		.read = ctxread,
 		.seek = ctxseek,
-		.tag = cb,
+		.tag = tag,
+		.toc = toc,
 		.buf = buf,
 		.bufsz = sizeof(buf),
 		.aux = &aux,
