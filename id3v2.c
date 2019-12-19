@@ -299,7 +299,7 @@ getduration(Tagctx *ctx, int offset)
 	uint x;
 	int xversion, xlayer, xbitrate;
 
-	if(ctx->read(ctx, ctx->buf, 64) != 64)
+	if(ctx->read(ctx, ctx->buf, 256) != 256)
 		return;
 
 	x = beuint((uchar*)ctx->buf);
@@ -325,9 +325,14 @@ getduration(Tagctx *ctx, int offset)
 				ctx->duration = n * samplespf * 1000 / ctx->samplerate;
 			}
 
-			if(ctx->duration == 0 && (x & 2) != 0 && framelen > 0){ /* file size is set */
-				n = beuint(b);
-				ctx->duration = n * samplespf * 1000 / framelen / ctx->samplerate;
+			if((x & 2) != 0){ /* file size is set */
+				n = beuint(b); b += 4;
+				if(ctx->duration == 0 && framelen > 0)
+					ctx->duration = n * samplespf * 1000 / framelen / ctx->samplerate;
+
+				if((x & 4) != 0){ /* TOC is set */
+					/* not doing anything yet */
+				}
 			}
 		}else if(memcmp(&ctx->buf[0x24], "VBRI", 4) == 0){
 			n = beuint((uchar*)&ctx->buf[0x32]);
