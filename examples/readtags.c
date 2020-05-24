@@ -94,7 +94,6 @@ main(int argc, char **argv)
 		if((aux.fd = open(argv[i], OREAD)) < 0)
 			print("failed to open\n");
 		else{
-			ctx.filename = argv[i];
 			if(tagsget(&ctx) != 0)
 				print("no tags or failed to read tags\n");
 			else{

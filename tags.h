@@ -25,6 +25,7 @@ enum
 /* Format of the audio file. */
 enum
 {
+	Funknown = -1,
 	Fmp3,
 	Fogg,
 	Fflac,
@@ -34,9 +35,6 @@ enum
 /* Tag parser context. You need to set it properly before parsing an audio file using libtags. */
 struct Tagctx
 {
-	/* Set it to the filename. Doesn't have to be a full path, but extension must be there. */
-	const char *filename;
-
 	/* Read function. This is what libtags uses to read the file. */
 	int (*read)(Tagctx *ctx, void *buf, int cnt);
 
