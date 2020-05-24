@@ -13,7 +13,7 @@ Comparison to id3lib and taglib:
 | m4a            | yes             | no               | yes              |
 | replay gain    | yes             | no               | ???              |
 | size           | tiny            | bloated          | more bloated     |
-| license        | MIT             | LGPL             | LGPL/MPL         |
+| license        | PPL             | LGPL             | LGPL/MPL         |
 | written in     | C               | C++              | C++              |
 | memory         | no allocations  | allocates memory | allocates memory |
 | thread safe    | yes             | ???              | ???              |
