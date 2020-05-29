@@ -372,7 +372,7 @@ tagid3v2(Tagctx *ctx)
 	if(ctx->read(ctx, d, sizeof(d)) != sizeof(d))
 		return -1;
 	if(!isid3(d)){ /* no tags, but the stream information is there */
-		if(d[0] != 0xff || (d[1] & 0xe0) != 0xe0)
+		if(d[0] != 0xff || (d[1] & 0xfe) != 0xfa)
 			return -1;
 		ctx->seek(ctx, -(int)sizeof(d), 1);
 		getduration(ctx, 0);
