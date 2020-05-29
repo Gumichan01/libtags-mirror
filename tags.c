@@ -44,8 +44,9 @@ tagsget(Tagctx *ctx)
 	res = -1;
 	for(i = 0; i < (int)(sizeof(g)/sizeof(g[0])); i++){
 		ctx->num = 0;
-		if(g[i].f(ctx) == 0 && ctx->num > 0){
-			res = 0;
+		if(g[i].f(ctx) == 0){
+			if(ctx->num > 0)
+				res = 0;
 			ctx->format = g[i].format;
 		}
 		ctx->seek(ctx, 0, 0);
