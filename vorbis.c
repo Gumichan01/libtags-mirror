@@ -71,34 +71,37 @@ tagvorbis(Tagctx *ctx)
 		ctx->seek(ctx, sz-1, 1);
 	}
 
-	if(ctx->read(ctx, &d[1], 10) != 10 || memcmp(&d[1], "vorbis", 6) != 0)
-		return -1;
-	sz = leuint(&d[7]);
-	if(ctx->seek(ctx, sz, 1) < 0 || ctx->read(ctx, h, 4) != 4)
-		return -1;
-	numtags = leuint(h);
-
-	for(i = 0; i < numtags; i++){
-		if(ctx->read(ctx, h, 4) != 4)
+	if(npages < 3) {
+		if(ctx->read(ctx, &d[1], 10) != 10 || memcmp(&d[1], "vorbis", 6) != 0)
 			return -1;
-		if((sz = leuint(h)) < 0)
+		sz = leuint(&d[7]);
+		if(ctx->seek(ctx, sz, 1) < 0 || ctx->read(ctx, h, 4) != 4)
 			return -1;
+		numtags = leuint(h);
 
-		if(ctx->bufsz < sz+1){
-			if(ctx->seek(ctx, sz, 1) < 0)
+		for(i = 0; i < numtags; i++){
+			if(ctx->read(ctx, h, 4) != 4)
 				return -1;
-			continue;
-		}
-		if(ctx->read(ctx, ctx->buf, sz) != sz)
-			return -1;
-		ctx->buf[sz] = 0;
+			if((sz = leuint(h)) < 0)
+				return -1;
 
-		if((v = strchr(ctx->buf, '=')) == nil)
-			return -1;
-		*v++ = 0;
-		cbvorbiscomment(ctx, ctx->buf, v);
+			if(ctx->bufsz < sz+1){
+				if(ctx->seek(ctx, sz, 1) < 0)
+					return -1;
+				continue;
+			}
+			if(ctx->read(ctx, ctx->buf, sz) != sz)
+				return -1;
+			ctx->buf[sz] = 0;
+
+			if((v = strchr(ctx->buf, '=')) == nil)
+				return -1;
+			*v++ = 0;
+			cbvorbiscomment(ctx, ctx->buf, v);
+		}
 	}
 
+notags:
 	/* calculate the duration */
 	if(ctx->samplerate > 0){
 		sz = ctx->bufsz <= 4096 ? ctx->bufsz : 4096;
