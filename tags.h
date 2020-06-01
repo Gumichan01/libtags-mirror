@@ -30,6 +30,7 @@ enum
 	Fogg,
 	Fflac,
 	Fm4a,
+	Fopus,
 };
 
 /* Tag parser context. You need to set it properly before parsing an audio file using libtags. */

@@ -8,6 +8,7 @@ OFILES=\
 	id3v1.$O\
 	id3v2.$O\
 	m4a.$O\
+	opus.$O\
 	tags.$O\
 	utf16.$O\
 	vorbis.$O\
