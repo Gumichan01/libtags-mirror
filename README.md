@@ -14,7 +14,7 @@ Comparison to id3lib and taglib:
 | opus           | yes             | no               | yes              |
 | replay gain    | yes             | no               | ???              |
 | size           | tiny            | bloated          | more bloated     |
-| license        | PPL             | LGPL             | LGPL/MPL         |
+| license        | MIT             | LGPL             | LGPL/MPL         |
 | written in     | C               | C++              | C++              |
 | memory         | no allocations  | allocates memory | allocates memory |
 | thread safe    | yes             | ???              | ???              |
