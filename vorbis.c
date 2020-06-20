@@ -101,7 +101,6 @@ tagvorbis(Tagctx *ctx)
 		}
 	}
 
-notags:
 	/* calculate the duration */
 	if(ctx->samplerate > 0){
 		sz = ctx->bufsz <= 4096 ? ctx->bufsz : 4096;
