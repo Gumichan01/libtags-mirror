@@ -42,6 +42,8 @@ tagm4a(Tagctx *ctx)
 			memcmp(d, "trak", 4) == 0 ||
 			memcmp(d, "mdia", 4) == 0 ||
 			memcmp(d, "minf", 4) == 0 ||
+			memcmp(d, "moov", 4) == 0 ||
+			memcmp(d, "trak", 4) == 0 ||
 			memcmp(d, "stbl", 4) == 0){
 			sz = 0;
 			continue;
