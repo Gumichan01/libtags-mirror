@@ -46,12 +46,17 @@ tagflac(Tagctx *ctx)
 			mime = ctx->buf+20;
 			if(n >= sz || n >= ctx->bufsz-1 || ctx->read(ctx, mime, n) != n)
 				return -1;
+			sz -= n;
 			mime[n] = 0;
 			ctx->read(ctx, d, 4); /* description */
+			sz -= 4;
 			offset = beuint(d) + ctx->seek(ctx, 0, 1) + 20;
 			ctx->read(ctx, d, 20);
+			sz -= 20;
 			n = beuint(&d[16]);
 			tagscallcb(ctx, Timage, "", mime, offset, n, nil);
+			if(ctx->seek(ctx, sz, 1) <= 0)
+				return -1;
 		}else if((d[0] & 0x7f) == 4){ /* 4 = vorbis comment */
 			int i, numtags, tagsz, vensz;
 			char *k, *v;
