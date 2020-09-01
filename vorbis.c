@@ -14,7 +14,7 @@ cbvorbiscomment(Tagctx *ctx, char *k, char *v){
 		txtcb(ctx, Talbum, k, v);
 	else if(cistrcmp(k, "title") == 0)
 		txtcb(ctx, Ttitle, k, v);
-	else if(cistrcmp(k, "artist") == 0 || cistrcmp(k, "performer") == 0)
+	else if(cistrcmp(k, "artist") == 0)
 		txtcb(ctx, Tartist, k, v);
 	else if(cistrcmp(k, "tracknumber") == 0)
 		txtcb(ctx, Ttrack, k, v);
