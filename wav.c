@@ -7,7 +7,8 @@ tagwav(Tagctx *ctx)
 {
 	uchar *d;
 	int i;
-	u32int sz, csz;
+	u32int csz;
+	uvlong sz;
 
 	d = (uchar*)ctx->buf;
 
@@ -18,7 +19,7 @@ tagwav(Tagctx *ctx)
 		if(i == 0){
 			if(memcmp(d, "RIFF", 4) != 0 || memcmp(d+8, "WAVE", 4) != 0)
 				return -1;
-			if((sz = beuint(d+4)) < 4)
+			if((sz = leuint(d+4)) < 4)
 				return -1;
 			sz -= 4;
 			continue;
