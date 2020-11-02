@@ -14,6 +14,7 @@ extern int tagid3v2(Tagctx *ctx);
 extern int tagid3v1(Tagctx *ctx);
 extern int tagm4a(Tagctx *ctx);
 extern int tagopus(Tagctx *ctx);
+extern int tagwav(Tagctx *ctx);
 
 static const Getter g[] =
 {
@@ -23,6 +24,7 @@ static const Getter g[] =
 	{tagflac, Fflac},
 	{tagm4a, Fm4a},
 	{tagopus, Fopus},
+	{tagwav, Fwav},
 };
 
 void

@@ -31,6 +31,9 @@ enum
 	Fflac,
 	Fm4a,
 	Fopus,
+	Fwav,
+
+	Fmax,
 };
 
 /* Tag parser context. You need to set it properly before parsing an audio file using libtags. */

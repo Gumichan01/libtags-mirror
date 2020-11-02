@@ -12,6 +12,7 @@ OFILES=\
 	tags.$O\
 	utf16.$O\
 	vorbis.$O\
+	wav.$O\
 
 HFILES=\
 	/sys/include/tags.h\

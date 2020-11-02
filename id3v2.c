@@ -12,7 +12,6 @@
 #include "tagspriv.h"
 
 #define synchsafe(d) (uint)(((d)[0]&127)<<21 | ((d)[1]&127)<<14 | ((d)[2]&127)<<7 | ((d)[3]&127)<<0)
-#define beuint(d) (uint)((d)[0]<<24 | (d)[1]<<16 | (d)[2]<<8 | (d)[3]<<0)
 
 static int
 v2cb(Tagctx *ctx, char *k, char *v)

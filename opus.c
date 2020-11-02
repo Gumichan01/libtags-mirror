@@ -1,7 +1,5 @@
 #include "tagspriv.h"
 
-#define leuint(d) (uint)(((uchar*)(d))[3]<<24 | ((uchar*)(d))[2]<<16 | ((uchar*)(d))[1]<<8 | ((uchar*)(d))[0]<<0)
-
 int
 tagopus(Tagctx *ctx)
 {

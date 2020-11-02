@@ -2,7 +2,6 @@
 /* https://developer.apple.com/library/mac/documentation/QuickTime/QTFF/QTFFChap2/qtff2.html */
 #include "tagspriv.h"
 
-#define beuint(d) (uint)((d)[0]<<24 | (d)[1]<<16 | (d)[2]<<8 | (d)[3]<<0)
 #define beuint16(d) (ushort)((d)[0]<<8 | (d)[1]<<0)
 
 int

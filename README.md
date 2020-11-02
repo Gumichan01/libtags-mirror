@@ -12,6 +12,7 @@ Comparison to id3lib and taglib:
 | FLAC           | yes             | no               | yes              |
 | m4a            | yes             | no               | yes              |
 | opus           | yes             | no               | yes              |
+| WAV            | yes             | no               | yes              |
 | replay gain    | yes             | no               | ???              |
 | size           | tiny            | bloated          | more bloated     |
 | license        | MIT             | LGPL             | LGPL/MPL         |

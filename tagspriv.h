@@ -20,6 +20,9 @@ enum
 	Numgenre = 192,
 };
 
+#define beuint(d) (uint)((d)[0]<<24 | (d)[1]<<16 | (d)[2]<<8 | (d)[3]<<0)
+#define leuint(d) (uint)((d)[3]<<24 | (d)[2]<<16 | (d)[1]<<8 | (d)[0]<<0)
+
 extern const char *id3genres[Numgenre];
 
 /*
