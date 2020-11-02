@@ -2,17 +2,30 @@
 
 #define le16u(d) (u16int)((d)[0] | (d)[1]<<8)
 
+static struct {
+	char *s;
+	int type;
+}t[] = {
+	{"IART", Tartist},
+	{"ICRD", Tdate},
+	{"IGNR", Tgenre},
+	{"INAM", Ttitle},
+	{"IPRD", Talbum},
+	{"ITRK", Ttrack},
+};
+
 int
 tagwav(Tagctx *ctx)
 {
 	uchar *d;
-	int i;
+	int i, n, info;
 	u32int csz;
 	uvlong sz;
 
 	d = (uchar*)ctx->buf;
 
 	sz = 1;
+	info = 0;
 	for(i = 0; i < 8 && sz > 0; i++){
 		if(ctx->read(ctx, d, 4+4+(i?0:4)) != 4+4+(i?0:4))
 			return -1;
@@ -24,14 +37,17 @@ tagwav(Tagctx *ctx)
 			sz -= 4;
 			continue;
 		}else if(memcmp(d, "INFO", 4) == 0){
+			info = 1;
 			ctx->seek(ctx, -4, 1);
 			continue;
 		}
 
+		if(sz <= 8)
+			break;
 		sz -= 4+4;
 		csz = leuint(d+4);
-		if(csz > sz)
-			return -1;
+		if(sz < csz)
+			break;
 		sz -= csz;
 
 		if(i == 1){
@@ -46,26 +62,20 @@ tagwav(Tagctx *ctx)
 		}else if(memcmp(d, "LIST", 4) == 0){
 			sz = csz - 4;
 			continue;
-		}else if(memcmp(d, "IART", 4) == 0){
-			if(ctx->read(ctx, d, csz) != csz)
-				return -1;
-			d[csz] = 0;
-			txtcb(ctx, Tartist, "", d);
-			csz = 1;
-		}else if(memcmp(d, "IPRD", 4) == 0){
-			if(ctx->read(ctx, d, csz) != csz)
-				return -1;
-			d[csz] = 0;
-			txtcb(ctx, Talbum, "", d);
-			csz = 1;
-		}else if(memcmp(d, "INAM", 4) == 0){
-			if(ctx->read(ctx, d, csz) != csz)
-				return -1;
-			d[csz] = 0;
-			txtcb(ctx, Ttitle, "", d);
-			csz = 1;
 		}else if(memcmp(d, "data", 4) == 0){
 			break;
+		}else if(info){
+			csz++;
+			for(n = 0; n < nelem(t); n++){
+				if(memcmp(d, t[n].s, 4) == 0){
+					if(ctx->read(ctx, d, csz) != csz)
+						return -1;
+					d[csz-1] = 0;
+					txtcb(ctx, t[n].type, "", d);
+					csz = 0;
+					break;
+				}
+			}
 		}
 
 		if(ctx->seek(ctx, csz, 1) < 0)
