@@ -32,6 +32,7 @@ enum
 	Fm4a,
 	Fopus,
 	Fwav,
+	Fit,
 
 	Fmax,
 };

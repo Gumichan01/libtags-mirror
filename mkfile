@@ -7,6 +7,7 @@ OFILES=\
 	id3genres.$O\
 	id3v1.$O\
 	id3v2.$O\
+	it.$O\
 	m4a.$O\
 	opus.$O\
 	tags.$O\
