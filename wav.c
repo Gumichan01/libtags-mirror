@@ -32,7 +32,8 @@ tagwav(Tagctx *ctx)
 		if(i == 0){
 			if(memcmp(d, "RIFF", 4) != 0 || memcmp(d+8, "WAVE", 4) != 0)
 				return -1;
-			if((sz = leuint(d+4)) < 4)
+			sz = leuint(d+4);
+			if(sz < 4)
 				return -1;
 			sz -= 4;
 			continue;
