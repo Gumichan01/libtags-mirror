@@ -33,6 +33,7 @@ enum
 	Fopus,
 	Fwav,
 	Fit,
+	Fxm,
 
 	Fmax,
 };
