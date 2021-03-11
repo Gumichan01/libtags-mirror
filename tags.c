@@ -8,13 +8,14 @@ struct Getter
 	int format;
 };
 
-extern int tagvorbis(Tagctx *ctx);
 extern int tagflac(Tagctx *ctx);
-extern int tagid3v2(Tagctx *ctx);
 extern int tagid3v1(Tagctx *ctx);
+extern int tagid3v2(Tagctx *ctx);
 extern int tagit(Tagctx *ctx);
 extern int tagm4a(Tagctx *ctx);
 extern int tagopus(Tagctx *ctx);
+extern int tags3m(Tagctx *ctx);
+extern int tagvorbis(Tagctx *ctx);
 extern int tagwav(Tagctx *ctx);
 extern int tagxm(Tagctx *ctx);
 
@@ -29,6 +30,7 @@ static const Getter g[] =
 	{tagwav, Fwav},
 	{tagit, Fit},
 	{tagxm, Fxm},
+	{tags3m, Fs3m},
 };
 
 void

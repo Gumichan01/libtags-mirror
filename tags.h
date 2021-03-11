@@ -34,6 +34,7 @@ enum
 	Fwav,
 	Fit,
 	Fxm,
+	Fs3m,
 
 	Fmax,
 };

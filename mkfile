@@ -10,6 +10,7 @@ OFILES=\
 	it.$O\
 	m4a.$O\
 	opus.$O\
+	s3m.$O\
 	tags.$O\
 	utf16.$O\
 	vorbis.$O\

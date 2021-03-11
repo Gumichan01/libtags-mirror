@@ -15,6 +15,7 @@ Comparison to id3lib and taglib:
 | WAV            | yes             | no               | yes              |
 | IT             | yes             | no               | ???              |
 | XM             | yes             | no               | ???              |
+| S3M            | yes             | no               | ???              |
 | replay gain    | yes             | no               | ???              |
 | size           | tiny            | bloated          | more bloated     |
 | license        | MIT             | LGPL             | LGPL/MPL         |
