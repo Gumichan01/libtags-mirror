@@ -16,6 +16,7 @@ OFILES=\
 	vorbis.$O\
 	wav.$O\
 	xm.$O\
+	mod.$O\
 
 HFILES=\
 	/sys/include/tags.h\
