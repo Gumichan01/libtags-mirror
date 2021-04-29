@@ -2,6 +2,7 @@
 LIB=/$objtype/lib/libtags.a
 
 OFILES=\
+	437.$O\
 	8859.$O\
 	flac.$O\
 	id3genres.$O\
