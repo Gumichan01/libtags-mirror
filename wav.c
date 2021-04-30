@@ -1,6 +1,6 @@
 #include "tagspriv.h"
 
-#define le16u(d) (u16int)((d)[0] | (d)[1]<<8)
+#define le16u(d) ((d)[0] | (d)[1]<<8)
 
 static struct {
 	char *s;
@@ -17,10 +17,10 @@ static struct {
 int
 tagwav(Tagctx *ctx)
 {
-	uchar *d;
 	int i, n, info;
-	u32int csz;
 	uvlong sz;
+	uchar *d;
+	uint csz;
 
 	d = (uchar*)ctx->buf;
 

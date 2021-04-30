@@ -1,6 +1,14 @@
 /* https://en.wikipedia.org/wiki/Code_page_437 */
 #include "tagspriv.h"
 
+#ifdef __unix__
+int
+cp437toutf8(char *o, int osz, const char *s, int sz)
+{
+	/* FIXME somebody come up with portable code */
+	return snprint(o, osz, "%.*s", sz, s);
+}
+#else
 static Rune rh[] =
 	L"ΔÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧"
 	L"ƒáíóúñÑªº¿⌐¬½¼¡«»░▒▓│d┤╡╢╖╕╣║╗╝╜"
@@ -32,3 +40,4 @@ cp437toutf8(char *o, int osz, const char *s, int sz)
 	*o = 0;
 	return i;
 }
+#endif
