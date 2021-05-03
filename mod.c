@@ -16,6 +16,7 @@ static char *variants[] =
 	"CD81",
 	"OCTA",
 	"OKTA",
+	"10CH",
 	"16CN",
 	"32CN",
 	nil,
