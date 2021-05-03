@@ -6,6 +6,7 @@
 #include <strings.h>
 #define snprint snprintf
 #define cistrcmp strcasecmp
+#define cistrncmp strncasecmp
 #define nil NULL
 #define UTFmax 4
 #define nelem(x) (int)(sizeof(x)/sizeof((x)[0]))
