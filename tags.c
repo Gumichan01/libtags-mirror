@@ -48,12 +48,13 @@ tagscallcb(Tagctx *ctx, int type, const char *k, char *s, int offset, int size, 
 			e--;
 		*e = 0;
 	}
-	if(type != Tunknown){
-		ctx->found |= 1<<type;
-		ctx->num++;
-	}
-	if(*s)
+	if(*s){
 		ctx->tag(ctx, type, k, s, offset, size, f);
+		if(type != Tunknown){
+			ctx->found |= 1<<type;
+			ctx->num++;
+		}
+	}
 }
 
 int
