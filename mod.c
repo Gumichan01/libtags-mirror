@@ -19,25 +19,28 @@ static char *variants[] =
 	"10CH",
 	"16CN",
 	"32CN",
+	nil,
 };
 
 int
 tagmod(Tagctx *ctx)
 {
-	uchar d[20+4], o[20*UTFmax+1];
+	uchar d[20], o[20*2+1];
 	int i;
 
-	if(ctx->read(ctx, d, 20) != 20)
-		return -1;
 	if(ctx->seek(ctx, 1080, 0) != 1080)
 		return -1;
-	if(ctx->read(ctx, d+20, 4) != 4)
+	if(ctx->read(ctx, d, 4) != 4)
 		return -1;
-	for(i = 0; i < nelem(variants); i++){
-		if(memcmp(d+20, variants[i], 4) == 0)
+	for(i = 0; ; i++){
+		if(variants[i] == nil)
+			return -1;
+		if(memcmp(d, variants[i], 4) == 0)
 			break;
 	}
-	if(i >= nelem(variants))
+	if(ctx->seek(ctx, 0, 0) != 0)
+		return -1;
+	if(ctx->read(ctx, d, 20) != 20)
 		return -1;
 	if(iso88591toutf8(o, sizeof(o), d, 20) > 0)
 		txtcb(ctx, Ttitle, "", o);

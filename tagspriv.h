@@ -4,14 +4,17 @@
 #include <string.h>
 #include <stdlib.h>
 #include <strings.h>
+#include <stdint.h>
 #define snprint snprintf
 #define cistrcmp strcasecmp
 #define cistrncmp strncasecmp
 #define nil NULL
 #define UTFmax 4
 #define nelem(x) (int)(sizeof(x)/sizeof((x)[0]))
-typedef unsigned char uchar;
-typedef unsigned long long uvlong;
+typedef uint8_t uchar;
+typedef uint16_t u16int;
+typedef uint32_t u32int;
+typedef uint64_t uvlong;
 #else
 #include <u.h>
 #include <libc.h>
