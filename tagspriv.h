@@ -15,6 +15,8 @@ typedef uint8_t uchar;
 typedef uint16_t u16int;
 typedef uint32_t u32int;
 typedef uint64_t uvlong;
+typedef unsigned int uint;
+typedef unsigned short ushort;
 #else
 #include <u.h>
 #include <libc.h>

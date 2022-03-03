@@ -18,9 +18,7 @@ int
 tagwav(Tagctx *ctx)
 {
 	uchar *d;
-	int i, n, info;
-	u32int csz;
-	uvlong sz;
+	int i, n, info, csz, sz;
 
 	d = (uchar*)ctx->buf;
 
